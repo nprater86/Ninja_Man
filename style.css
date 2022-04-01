@@ -23,50 +23,48 @@ body {
 }
 
 .blank {
-    height: 20px;
-    width: 20px;
+    height: 40px;
+    width: 40px;
     background-color: black;
     display: inline-block;
 }
 
 .brick {
-    height: 20px;
-    width: 20px;
+    height: 40px;
+    width: 40px;
     background-color: blue;
     display: inline-block;
 }
 
 .coin {
-    height: 20px;
-    width: 20px;
+    height: 40px;
+    width: 40px;
     background: url('./images/coin.gif') no-repeat center;
     background-size: 50%;
     display: inline-block;
 }
 
 .cherry {
-    height: 20px;
-    width: 20px;
+    height: 40px;
+    width: 40px;
     background: url('./images/cherry.gif') no-repeat center;
     background-size: 100%;
     display: inline-block;
 }
 
 #pacman {
-    height: 20px;
-    width: 20px;
+    height: 40px;
+    width: 40px;
     background: url('./images/pac-man.gif') no-repeat center;
     background-size: contain;
     display: inline-block;
     position: absolute;
-    top: 340px;
-    left: 180px;
     z-index:10;
 }
 
 #pink {
-    height: 20px;
-    width: 20px;
+    height: 40px;
+    width: 40px;
     background: url('./images/pink.webp') no-repeat center;
     background-size: contain;
     display: inline-block;
@@ -75,8 +73,8 @@ body {
 }
 
 #red {
-    height: 20px;
-    width: 20px;
+    height: 40px;
+    width: 40px;
     background: url('./images/red.gif') no-repeat center;
     background-size: contain;
     display: inline-block;
@@ -86,8 +84,8 @@ body {
 }
 
 #yellow {
-    height: 20px;
-    width: 20px;
+    height: 40px;
+    width: 40px;
     background: url('./images/yellow.webp') no-repeat center;
     background-size: contain;
     display: inline-block;
@@ -96,16 +94,16 @@ body {
 }
 
 #gate {
-    height: 20px;
-    width: 20px;
+    height: 40px;
+    width: 40px;
     background: url('./images/door.webp') no-repeat center;
     background-size: contain;
     display: inline-block;
     position: absolute;
     transform: scaleX(-1);
     background-color: black;
-    top: 200px;
-    left: 180px;
+    top: 400px;
+    left: 360px;
 }
 
 h1 {
@@ -114,14 +112,14 @@ h1 {
 
 #gameOver{
     position: absolute;
-    top: 200px;
+    top: 400px;
     left: 125px;
     display: none;
 }
 
 #youWin{
     position: absolute;
-    top: 200px;
+    top: 400px;
     left: 140px;
     display: none;
 }

@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Press Start 2P', monospace;
+    color: white;
+}
+
+.game {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.row {
+    display: flex;
+}
+
+body {
+    background-color: black;
+}
+
+.blank {
+    height: 20px;
+    width: 20px;
+    background-color: black;
+    display: inline-block;
+}
+
+.brick {
+    height: 20px;
+    width: 20px;
+    background-color: blue;
+    display: inline-block;
+}
+
+.coin {
+    height: 20px;
+    width: 20px;
+    background: url('./images/coin.gif') no-repeat center;
+    background-size: 50%;
+    display: inline-block;
+}
+
+.cherry {
+    height: 20px;
+    width: 20px;
+    background: url('./images/cherry.gif') no-repeat center;
+    background-size: 100%;
+    display: inline-block;
+}
+
+#pacman {
+    height: 20px;
+    width: 20px;
+    background: url('./images/pac-man.gif') no-repeat center;
+    background-size: contain;
+    display: inline-block;
+    position: absolute;
+    top: 340px;
+    left: 180px;
+    z-index:10;
+}
+
+#pink {
+    height: 20px;
+    width: 20px;
+    background: url('./images/pink.webp') no-repeat center;
+    background-size: contain;
+    display: inline-block;
+    position: absolute;
+    z-index:10;
+}
+
+#red {
+    height: 20px;
+    width: 20px;
+    background: url('./images/red.gif') no-repeat center;
+    background-size: contain;
+    display: inline-block;
+    position: absolute;
+    transform: scaleX(-1);
+    z-index:10;
+}
+
+#yellow {
+    height: 20px;
+    width: 20px;
+    background: url('./images/yellow.webp') no-repeat center;
+    background-size: contain;
+    display: inline-block;
+    position: absolute;
+    z-index:10;
+}
+
+#gate {
+    height: 20px;
+    width: 20px;
+    background: url('./images/door.webp') no-repeat center;
+    background-size: contain;
+    display: inline-block;
+    position: absolute;
+    transform: scaleX(-1);
+    background-color: black;
+    top: 200px;
+    left: 180px;
+}
+
+h1 {
+    font-size: small;
+}
+
+#gameOver{
+    position: absolute;
+    top: 200px;
+    left: 125px;
+    display: none;
+}
+
+#youWin{
+    position: absolute;
+    top: 200px;
+    left: 140px;
+    display: none;
+}

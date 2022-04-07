@@ -60,6 +60,7 @@ body {
     display: inline-block;
     position: absolute;
     z-index:10;
+    transition: top 0.5s linear, left 0.5s linear;
 }
 
 #pink {
@@ -70,6 +71,7 @@ body {
     display: inline-block;
     position: absolute;
     z-index:10;
+    transition: top 0.5s linear, left 0.5s linear;
 }
 
 #red {
@@ -81,6 +83,7 @@ body {
     position: absolute;
     transform: scaleX(-1);
     z-index:10;
+    transition: top 0.5s linear, left 0.5s linear;
 }
 
 #yellow {
@@ -91,6 +94,7 @@ body {
     display: inline-block;
     position: absolute;
     z-index:10;
+    transition: top 0.5s linear, left 0.5s linear;
 }
 
 #gate {
@@ -113,13 +117,13 @@ h1 {
 #gameOver{
     position: absolute;
     top: 400px;
-    left: 125px;
+    left: 320px;
     display: none;
 }
 
 #youWin{
     position: absolute;
     top: 400px;
-    left: 140px;
+    left: 320px;
     display: none;
 }

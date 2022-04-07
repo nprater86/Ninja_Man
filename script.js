@@ -48,6 +48,7 @@ function displayWorld(){
         output += `</div>`;
     }
     world.innerHTML = output;
+    scoreDisplay.innerHTML = score;
 }
 
 displayWorld();
@@ -56,43 +57,62 @@ displayWorld();
 var pacman = document.getElementById('pacman');
 var pacmanX = 9;
 var pacmanY = 17;
+var pacmanFace = 0;
 pacman.style.top = `${pacmanY*40}px`;
 pacman.style.left = `${pacmanX*40}px`;
 
-document.addEventListener("keydown", movePacman);
+
+document.addEventListener("keydown", pacmanDirection);
+
+function pacmanDirection() {
+    if (event.keyCode === 40){ //move down
+        pacmanFace = 3;
+        pacman.style.transform = `rotate(90deg)`;
+    } else if(event.keyCode === 38){ //move up
+        pacmanFace = 4;
+        pacman.style.transform = `rotate(-90deg)`;
+    } else if(event.keyCode === 39){ //move right
+        pacmanFace = 1;
+        pacman.style.transform="scaleX(1)";
+    } else if(event.keyCode === 37){ //move left
+        pacmanFace = 2;
+        pacman.style.transform = "scaleX(-1)";
+    }
+}
 
 function movePacman() {
-    if (event.keyCode === 40 && worldGenerator[pacmanY+1][pacmanX] != 2 && worldGenerator[pacmanY+1][pacmanX] != 4){ //move down
+    if (pacmanFace === 3 && worldGenerator[pacmanY+1][pacmanX] != 2 && worldGenerator[pacmanY+1][pacmanX] != 4){ //move down
         pacmanY++;
         pacman.style.top = `${pacmanY*40}px`;
         pacman.style.transform = `rotate(90deg)`;
-    } else if(event.keyCode === 38  && worldGenerator[pacmanY-1][pacmanX] != 2){ //move up
+    } else if(pacmanFace === 4  && worldGenerator[pacmanY-1][pacmanX] != 2){ //move up
         pacmanY--;
         pacman.style.top = `${pacmanY*40}px`;
         pacman.style.transform = `rotate(-90deg)`;
-    } else if(event.keyCode === 39  && worldGenerator[pacmanY][pacmanX+1] != 2 && pacmanX < 18){ //move right
+    } else if(pacmanFace === 1  && worldGenerator[pacmanY][pacmanX+1] != 2 && pacmanX < 18){ //move right
         pacmanX++;
         pacman.style.left = `${pacmanX*40}px`;
         pacman.style.transform="scaleX(1)";
-    } else if(event.keyCode === 37 && worldGenerator[pacmanY][pacmanX-1] != 2 && pacmanX > 0){ //move left
+    } else if(pacmanFace === 2 && worldGenerator[pacmanY][pacmanX-1] != 2 && pacmanX > 0){ //move left
         pacmanX--;
         pacman.style.left = `${pacmanX*40}px`;
         pacman.style.transform = "scaleX(-1)";
-    } else if(event.keyCode === 39  && pacmanX === 18 && pacmanY === 10){ //move to left of screen if goes through right corridor
+        
+    } else if(pacmanFace === 1  && pacmanX === 18 && pacmanY === 10){ //move to left of screen if goes through right corridor
         pacmanX = 0;
         pacman.style.left = `${pacmanX*40}px`;
         pacman.style.transform="scaleX(1)";
-    } else if(event.keyCode === 37  && pacmanX === 0 && pacmanY === 10){ //move to right of screen if goes through left corridor
+    } else if(pacmanFace === 2  && pacmanX === 0 && pacmanY === 10){ //move to right of screen if goes through left corridor
         pacmanX = 18;
         pacman.style.left = `${pacmanX*40}px`;
         pacman.style.transform = "scaleX(-1)";
     }
     eatCoin();
-    movePink();
-    moveRed();
-    moveYellow();
-    checkDead();
-    checkWin()
+    // movePink();
+    // moveRed();
+    // moveYellow();
+    // checkDead();
+    // checkWin()
 }
 
 //eat coin
@@ -320,8 +340,6 @@ function moveYellow(){
             }
         }
     }
-    console.log("diffY: "+diffY);
-    console.log("diffX: "+diffX);
 }
 
 //game over
@@ -329,15 +347,15 @@ function moveYellow(){
 function checkDead(){
     if (pinkY === pacmanY && pinkX === pacmanX){
         document.getElementById('gameOver').style.display = 'initial';
-        document.removeEventListener("keydown", movePacman);
+        document.removeEventListener("keydown", pacmanDirection);
         document.addEventListener("keydown", reset);
     } else if (redY === pacmanY && redX === pacmanX){
         document.getElementById('gameOver').style.display = 'initial';
-        document.removeEventListener("keydown", movePacman);
+        document.removeEventListener("keydown", pacmanDirection);
         document.addEventListener("keydown", reset);
     } else if (yellowY === pacmanY && yellowX === pacmanX) {
         document.getElementById('gameOver').style.display = 'initial';
-        document.removeEventListener("keydown", movePacman);
+        document.removeEventListener("keydown", pacmanDirection);
         document.addEventListener("keydown", reset);
     }
 }
@@ -345,7 +363,7 @@ function checkDead(){
 function checkWin(){
     if(score === 354){
         document.getElementById('youWin').style.display = 'initial';
-        document.removeEventListener("keydown", movePacman);
+        document.removeEventListener("keydown", pacmanDirection);
         document.addEventListener("keydown", reset);
     }
 }
@@ -398,6 +416,29 @@ function reset(){
     document.getElementById('gameOver').style.display = 'none';
     document.getElementById('youWin').style.display = 'none';
     document.removeEventListener("keydown", reset);
-    document.addEventListener("keydown", movePacman);
+    document.addEventListener("keydown", pacmanDirection);
     displayWorld();
+}
+
+setInterval( function() {
+    movePacman();
+    movePink();
+    moveRed();
+    moveYellow();
+    checkDead();
+    checkWin()
+}, 500);
+
+function removeTransitions() {
+    pacman.style.transition = "none";
+    pink.style.transition = "none";
+    red.style.transition = "none";
+    yellow.style.transition = "none";
+}
+
+function addTransition() {
+    pacman.style.transition = "top 0.5s linear, left 0.5s linear";
+    pink.style.transition = "top 0.5s linear, left 0.5s linear";
+    red.style.transition = "top 0.5s linear, left 0.5s linear";
+    yellow.style.transition = "top 0.5s linear, left 0.5s linear";
 }

@@ -52,6 +52,7 @@ function displayWorld(){
 }
 
 displayWorld();
+start();
 
 //Pacman Position and Move Pacman
 var pacman = document.getElementById('pacman');
@@ -349,14 +350,19 @@ function checkDead(){
         document.getElementById('gameOver').style.display = 'initial';
         document.removeEventListener("keydown", pacmanDirection);
         document.addEventListener("keydown", reset);
+        return true;
     } else if (redY === pacmanY && redX === pacmanX){
         document.getElementById('gameOver').style.display = 'initial';
         document.removeEventListener("keydown", pacmanDirection);
         document.addEventListener("keydown", reset);
+        return true;
     } else if (yellowY === pacmanY && yellowX === pacmanX) {
         document.getElementById('gameOver').style.display = 'initial';
         document.removeEventListener("keydown", pacmanDirection);
         document.addEventListener("keydown", reset);
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -365,12 +371,17 @@ function checkWin(){
         document.getElementById('youWin').style.display = 'initial';
         document.removeEventListener("keydown", pacmanDirection);
         document.addEventListener("keydown", reset);
+        return true;
+    } else {
+        return false;
     }
+    
 }
 
 function reset(){
     pacmanX = 9;
     pacmanY = 17;
+    pacmanFace = 0;
     pacman.style.top = `${pacmanY*40}px`;
     pacman.style.left = `${pacmanX*40}px`;
     pacman.style.transform="scaleX(1)";
@@ -418,16 +429,21 @@ function reset(){
     document.removeEventListener("keydown", reset);
     document.addEventListener("keydown", pacmanDirection);
     displayWorld();
+    start();
 }
 
-setInterval( function() {
-    movePacman();
-    movePink();
-    moveRed();
-    moveYellow();
-    checkDead();
-    checkWin()
-}, 500);
+function start() {let gameTime = setInterval( function() {
+        movePacman();
+        movePink();
+        moveRed();
+        moveYellow();
+        checkDead();
+        checkWin();
+        if (checkDead() || checkWin()){
+            clearInterval(gameTime);
+        }
+    }, 500);
+}
 
 function removeTransitions() {
     pacman.style.transition = "none";
